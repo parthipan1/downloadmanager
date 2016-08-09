@@ -16,6 +16,10 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.10.19'
 }
 
+jar {
+     archiveName project.group+'-'+project.name+'-'+project.version+'.jar'
+}
+
 task createPom() << {
 	apply plugin: 'maven'
     //description "Generates pom.xml"
@@ -36,7 +40,7 @@ task createPom() << {
             dependencyNode.appendNode('artifactId', dependency.name)
             dependencyNode.appendNode('version', dependency.version)
         }
-    }.writeTo("$buildDir/libs/"+project.name+"-"+project.version+".xml")
+    }.writeTo("$buildDir/libs/"+project.group+"-"+project.name+"-"+project.version+".xml")
 }
 
 build.finalizedBy 'createPom'
